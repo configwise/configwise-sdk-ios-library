@@ -34,10 +34,6 @@ let package = Package(
         ),
         .binaryTarget(
             name: "CWSDKRender",
-            dependencies: [
-                // TODO [smuravev] Test if dependency really works as expected. Maybe replace it onto: `.target(name: "CWSDKData")`
-                "CWSDKData"
-            ],
             path: "CWSDKRender/Sources/CWSDKRender.xcframework"
         )
     ]

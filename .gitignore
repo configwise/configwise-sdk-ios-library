@@ -1,0 +1,28 @@
+# Ignore OS generated files and commons #
+#########################################
+.DS_Store*
+ehthumbs.db
+Thumbs.db
+*.tmp
+*.log
+*.swp
+tmp
+null
+*~
+
+# GIT specific #
+################
+!.gitkeep
+
+# Ignore IDE and build tools #
+##############################
+.idea/
+*.iml
+*.ipr
+*.iws
+/.build
+/Packages
+/*.xcodeproj
+xcuserdata/
+DerivedData/
+.swiftpm/xcode/package.xcworkspace/contents.xcworkspacedata

@@ -1,0 +1,11 @@
+framework module CWSDKRender {
+  umbrella header "CWSDKRender.h"
+
+  export *
+  module * { export * }
+}
+
+module CWSDKRender.Swift {
+    header "CWSDKRender-Swift.h"
+    requires objc
+}

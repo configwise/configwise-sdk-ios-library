@@ -1,1 +1,3 @@
-# configwise-sdk-ios-library
+# ConfigWiseSDK
+
+A description of this package.

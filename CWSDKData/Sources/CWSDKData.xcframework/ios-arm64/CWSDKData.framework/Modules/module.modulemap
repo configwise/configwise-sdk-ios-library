@@ -1,0 +1,11 @@
+framework module CWSDKData {
+  umbrella header "CWSDKData.h"
+
+  export *
+  module * { export * }
+}
+
+module CWSDKData.Swift {
+    header "CWSDKData-Swift.h"
+    requires objc
+}

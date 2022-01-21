@@ -30,7 +30,6 @@ let package = Package(
         // Targets can depend on other targets in this package, and on products in packages this package depends on.
         .binaryTarget(
             name: "CWSDKData",
-            dependencies: [],
             path: "CWSDKData/Sources/CWSDKData.xcframework"
         ),
         .binaryTarget(
@@ -39,12 +38,7 @@ let package = Package(
                 // TODO [smuravev] Test if dependency really works as expected. Maybe replace it onto: `.target(name: "CWSDKData")`
                 "CWSDKData"
             ],
-            path: "CWSDKRender/Sources/CWSDKRender.xcframework",
-            
-            // TODO [smuravev] Test if the following 'linkerSettings' block required. Remove it of not.
-            linkerSettings: [
-                .linkedFramework("RealityKit", .when(platforms: [.iOS])),
-            ]
+            path: "CWSDKRender/Sources/CWSDKRender.xcframework"
         )
     ]
 )

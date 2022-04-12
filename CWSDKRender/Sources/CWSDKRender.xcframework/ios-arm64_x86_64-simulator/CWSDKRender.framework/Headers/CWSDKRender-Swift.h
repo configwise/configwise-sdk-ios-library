@@ -190,6 +190,10 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 #if __has_warning("-Watimport-in-framework-header")
 #pragma clang diagnostic ignored "-Watimport-in-framework-header"
 #endif
+@import ARKit;
+@import CoreMedia;
+@import Foundation;
+@import ObjectiveC;
 #endif
 
 #pragma clang diagnostic ignored "-Wproperty-attribute-mismatch"
@@ -206,6 +210,39 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 # pragma clang attribute push(__attribute__((external_source_symbol(language="Swift", defined_in="CWSDKRender",generated_declaration))), apply_to=any(function,enum,objc_interface,objc_category,objc_protocol))
 # pragma pop_macro("any")
 #endif
+
+
+
+@class ARSession;
+@class ARFrame;
+@class ARAnchor;
+@class ARCamera;
+@class NSNumber;
+@class ARCollaborationData;
+@class ARGeoTrackingStatus;
+@class ARCoachingOverlayView;
+
+SWIFT_CLASS("_TtC11CWSDKRender11CWArAdapter")
+@interface CWArAdapter : NSObject <ARCoachingOverlayViewDelegate, ARSessionDelegate>
+- (void)session:(ARSession * _Nonnull)session didUpdateFrame:(ARFrame * _Nonnull)frame;
+- (void)session:(ARSession * _Nonnull)session didAddAnchors:(NSArray<ARAnchor *> * _Nonnull)anchors;
+- (void)session:(ARSession * _Nonnull)session didUpdateAnchors:(NSArray<ARAnchor *> * _Nonnull)anchors;
+- (void)session:(ARSession * _Nonnull)session didRemoveAnchors:(NSArray<ARAnchor *> * _Nonnull)anchors;
+- (void)session:(ARSession * _Nonnull)session didFailWithError:(NSError * _Nonnull)error;
+- (void)session:(ARSession * _Nonnull)session cameraDidChangeTrackingState:(ARCamera * _Nonnull)camera;
+- (void)sessionWasInterrupted:(ARSession * _Nonnull)session;
+- (void)sessionInterruptionEnded:(ARSession * _Nonnull)session;
+- (BOOL)sessionShouldAttemptRelocalization:(ARSession * _Nonnull)session SWIFT_WARN_UNUSED_RESULT;
+- (void)session:(ARSession * _Nonnull)session didOutputAudioSampleBuffer:(CMSampleBufferRef _Nonnull)audioSampleBuffer;
+- (void)session:(ARSession * _Nonnull)session didOutputCollaborationData:(ARCollaborationData * _Nonnull)data;
+- (void)session:(ARSession * _Nonnull)session didChangeGeoTrackingStatus:(ARGeoTrackingStatus * _Nonnull)geoTrackingStatus;
+- (void)coachingOverlayViewDidRequestSessionReset:(ARCoachingOverlayView * _Nonnull)coachingOverlayView;
+- (void)coachingOverlayViewWillActivate:(ARCoachingOverlayView * _Nonnull)coachingOverlayView;
+- (void)coachingOverlayViewDidDeactivate:(ARCoachingOverlayView * _Nonnull)coachingOverlayView;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
 
 #if __has_attribute(external_source_symbol)
 # pragma clang attribute pop
@@ -404,6 +441,10 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 #if __has_warning("-Watimport-in-framework-header")
 #pragma clang diagnostic ignored "-Watimport-in-framework-header"
 #endif
+@import ARKit;
+@import CoreMedia;
+@import Foundation;
+@import ObjectiveC;
 #endif
 
 #pragma clang diagnostic ignored "-Wproperty-attribute-mismatch"
@@ -420,6 +461,39 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 # pragma clang attribute push(__attribute__((external_source_symbol(language="Swift", defined_in="CWSDKRender",generated_declaration))), apply_to=any(function,enum,objc_interface,objc_category,objc_protocol))
 # pragma pop_macro("any")
 #endif
+
+
+
+@class ARSession;
+@class ARFrame;
+@class ARAnchor;
+@class ARCamera;
+@class NSNumber;
+@class ARCollaborationData;
+@class ARGeoTrackingStatus;
+@class ARCoachingOverlayView;
+
+SWIFT_CLASS("_TtC11CWSDKRender11CWArAdapter")
+@interface CWArAdapter : NSObject <ARCoachingOverlayViewDelegate, ARSessionDelegate>
+- (void)session:(ARSession * _Nonnull)session didUpdateFrame:(ARFrame * _Nonnull)frame;
+- (void)session:(ARSession * _Nonnull)session didAddAnchors:(NSArray<ARAnchor *> * _Nonnull)anchors;
+- (void)session:(ARSession * _Nonnull)session didUpdateAnchors:(NSArray<ARAnchor *> * _Nonnull)anchors;
+- (void)session:(ARSession * _Nonnull)session didRemoveAnchors:(NSArray<ARAnchor *> * _Nonnull)anchors;
+- (void)session:(ARSession * _Nonnull)session didFailWithError:(NSError * _Nonnull)error;
+- (void)session:(ARSession * _Nonnull)session cameraDidChangeTrackingState:(ARCamera * _Nonnull)camera;
+- (void)sessionWasInterrupted:(ARSession * _Nonnull)session;
+- (void)sessionInterruptionEnded:(ARSession * _Nonnull)session;
+- (BOOL)sessionShouldAttemptRelocalization:(ARSession * _Nonnull)session SWIFT_WARN_UNUSED_RESULT;
+- (void)session:(ARSession * _Nonnull)session didOutputAudioSampleBuffer:(CMSampleBufferRef _Nonnull)audioSampleBuffer;
+- (void)session:(ARSession * _Nonnull)session didOutputCollaborationData:(ARCollaborationData * _Nonnull)data;
+- (void)session:(ARSession * _Nonnull)session didChangeGeoTrackingStatus:(ARGeoTrackingStatus * _Nonnull)geoTrackingStatus;
+- (void)coachingOverlayViewDidRequestSessionReset:(ARCoachingOverlayView * _Nonnull)coachingOverlayView;
+- (void)coachingOverlayViewWillActivate:(ARCoachingOverlayView * _Nonnull)coachingOverlayView;
+- (void)coachingOverlayViewDidDeactivate:(ARCoachingOverlayView * _Nonnull)coachingOverlayView;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
 
 #if __has_attribute(external_source_symbol)
 # pragma clang attribute pop

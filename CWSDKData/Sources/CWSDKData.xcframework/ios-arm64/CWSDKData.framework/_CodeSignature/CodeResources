@@ -6,39 +6,39 @@
 	<dict>
 		<key>Headers/CWSDKData-Swift.h</key>
 		<data>
-		Eu2BMBTZlIno9r4iRi/YdR43p0g=
+		LJlqJAjiCyw5Wa+yDTZJ28unhtM=
 		</data>
 		<key>Headers/CWSDKData.h</key>
 		<data>
-		GZMZX3FbCIlKbxeQCTBwrpE6pZ8=
+		6jqeEFu4trZW00dwwR6ej2lmcKc=
 		</data>
 		<key>Info.plist</key>
 		<data>
-		Nxhcvhz0jIwV6O0425PVIWxy9VQ=
+		oVqdQh4Y/fBneH0OcFpV00tZUZo=
 		</data>
 		<key>Modules/CWSDKData.swiftmodule/arm64-apple-ios.swiftdoc</key>
 		<data>
-		l4dNRaUt3+5YScxAjuEtASCJhyU=
+		d9mlE1xhG06JWoVbl6A68bBMw/c=
 		</data>
 		<key>Modules/CWSDKData.swiftmodule/arm64-apple-ios.swiftinterface</key>
 		<data>
-		RSQXFUHJS7K5U19m3WVdnUDMlGY=
+		nNiHOswJQy6FeAsoAfyPq6yW4PY=
 		</data>
 		<key>Modules/CWSDKData.swiftmodule/arm64-apple-ios.swiftmodule</key>
 		<data>
-		EeDVfNFe48t4j02STGQBDMeK3ic=
+		jvChe+BvIGTs9Bgg+5utINZAJ2A=
 		</data>
 		<key>Modules/CWSDKData.swiftmodule/arm64.swiftdoc</key>
 		<data>
-		l4dNRaUt3+5YScxAjuEtASCJhyU=
+		d9mlE1xhG06JWoVbl6A68bBMw/c=
 		</data>
 		<key>Modules/CWSDKData.swiftmodule/arm64.swiftinterface</key>
 		<data>
-		RSQXFUHJS7K5U19m3WVdnUDMlGY=
+		nNiHOswJQy6FeAsoAfyPq6yW4PY=
 		</data>
 		<key>Modules/CWSDKData.swiftmodule/arm64.swiftmodule</key>
 		<data>
-		EeDVfNFe48t4j02STGQBDMeK3ic=
+		jvChe+BvIGTs9Bgg+5utINZAJ2A=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -51,56 +51,56 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			KgHkq4C0wNoGCe/+3mR+Jak0HIB6aj1HOLo46Ik9dIQ=
+			oGE5F7amdcNxnaHq0s4vJi/PJ0PnvSebFgu9rCqLwjM=
 			</data>
 		</dict>
 		<key>Headers/CWSDKData.h</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			xm0fMnooVpRms+wE0v+m1y7Ec5Vb/FFlZs8wBY7jHXg=
+			1i+yBMc+66fZoi9A1snDUYY/WpBOIUlWCWLjTa3EPsw=
 			</data>
 		</dict>
 		<key>Modules/CWSDKData.swiftmodule/arm64-apple-ios.swiftdoc</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			zrD/xvHhlyxM+BDyiEHpVg0fFbrRxQ1ituThr0wk5aI=
+			9igUdvrhmoEvyacayJYYiJPvoJlutvoOiRUEJCGFMPM=
 			</data>
 		</dict>
 		<key>Modules/CWSDKData.swiftmodule/arm64-apple-ios.swiftinterface</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			5xfJ5rZpYwkyXxSx3gSDRqD+2Ie57Oqrg90g3OPCzTM=
+			UhAyNaVEeAuWfb76qzZm4YOwmnU7xYv7VvL25bBqk3Y=
 			</data>
 		</dict>
 		<key>Modules/CWSDKData.swiftmodule/arm64-apple-ios.swiftmodule</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			b1TKekz/1PU0BhbwECKpiRk7ro12jEumkrQWad2NWyU=
+			cPC+kZdnJ1vnfhtCHtyQsb/Wrqe0ODF/qD3ntmBCEl0=
 			</data>
 		</dict>
 		<key>Modules/CWSDKData.swiftmodule/arm64.swiftdoc</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			zrD/xvHhlyxM+BDyiEHpVg0fFbrRxQ1ituThr0wk5aI=
+			9igUdvrhmoEvyacayJYYiJPvoJlutvoOiRUEJCGFMPM=
 			</data>
 		</dict>
 		<key>Modules/CWSDKData.swiftmodule/arm64.swiftinterface</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			5xfJ5rZpYwkyXxSx3gSDRqD+2Ie57Oqrg90g3OPCzTM=
+			UhAyNaVEeAuWfb76qzZm4YOwmnU7xYv7VvL25bBqk3Y=
 			</data>
 		</dict>
 		<key>Modules/CWSDKData.swiftmodule/arm64.swiftmodule</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			b1TKekz/1PU0BhbwECKpiRk7ro12jEumkrQWad2NWyU=
+			cPC+kZdnJ1vnfhtCHtyQsb/Wrqe0ODF/qD3ntmBCEl0=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>

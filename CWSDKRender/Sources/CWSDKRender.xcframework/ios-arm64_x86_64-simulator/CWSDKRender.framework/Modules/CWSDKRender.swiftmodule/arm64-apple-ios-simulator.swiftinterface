@@ -1,11 +1,181 @@
 // swift-interface-format-version: 1.0
 // swift-compiler-version: Apple Swift version 5.5.2 (swiftlang-1300.0.47.5 clang-1300.0.29.30)
-// swift-module-flags: -target arm64-apple-ios15.2-simulator -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name CWSDKRender
+// swift-module-flags: -target arm64-apple-ios14.5-simulator -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name CWSDKRender
+import ARKit
 import CWSDKData
 @_exported import CWSDKRender
+import Combine
 import Foundation
+import RealityKit
 import Swift
 import _Concurrency
-public struct CWArAdapter {
-  public init()
+import simd
+public class CWArObjectRepositoryImpl : CWSDKRender.CWArObjectRepository {
+  public init(downloadingRepository: CWSDKData.CWDownloadingRepository)
+  public func createArObject(catalogItem: CWSDKData.CWCatalogItemEntity) -> CWSDKRender.CWArObjectEntity
+  public func loadModel(from modelUrl: Foundation.URL) -> Combine.AnyPublisher<RealityFoundation.ModelEntity, Swift.Error>
+  @objc deinit
 }
+public enum CWLoadable<T> {
+  case notRequested
+  case loading(last: T?)
+  case loaded(T)
+  case failed(Swift.Error)
+  public var value: T? {
+    get
+  }
+  public var error: Swift.Error? {
+    get
+  }
+  public var isLoading: Swift.Bool {
+    get
+  }
+  public var isLoaded: Swift.Bool {
+    get
+  }
+  public var isFailed: Swift.Bool {
+    get
+  }
+  public var isNotRequested: Swift.Bool {
+    get
+  }
+}
+extension CWSDKRender.CWLoadable : Swift.Equatable where T : Swift.Equatable {
+  public static func == (lhs: CWSDKRender.CWLoadable<T>, rhs: CWSDKRender.CWLoadable<T>) -> Swift.Bool
+}
+@_hasMissingDesignatedInitializers public class CWArObjectEntity : RealityFoundation.Entity, Foundation.ObservableObject {
+  final public let catalogItem: CWSDKData.CWCatalogItemEntity
+  public var isSelected: Swift.Bool {
+    get
+  }
+  @Combine.Published @_projectedValueProperty($loadableContent) public var loadableContent: CWSDKRender.CWLoadable<RealityFoundation.Entity> {
+    get
+    set
+  }
+  public var $loadableContent: Combine.Published<CWSDKRender.CWLoadable<RealityFoundation.Entity>>.Publisher {
+    get
+    @available(iOS 14.0, tvOS 14.0, watchOS 7.0, macOS 11.0, *)
+    set
+  }
+  public typealias ObjectWillChangePublisher = Combine.ObservableObjectPublisher
+  @objc deinit
+}
+extension CWSDKRender.CWArObjectEntity : RealityFoundation.HasCollision {
+}
+extension CWSDKRender.CWArObjectEntity : CWSDKRender.CWHasLoadable {
+  public func load()
+  public func unload()
+}
+@_hasMissingDesignatedInitializers public class CWArAnchorEntity : RealityFoundation.Entity, RealityFoundation.HasAnchoring {
+  public init(_ arObject: CWSDKRender.CWArObjectEntity, world: simd.float4x4? = nil)
+  @objc deinit
+}
+public protocol CWHasLoadable {
+  func load()
+  func unload()
+}
+extension simd.simd_float4x4 {
+  public var translation: simd.simd_float3 {
+    get
+    set(newValue)
+  }
+  public var orientation: simd.simd_quatf {
+    get
+  }
+  public var scale: simd.simd_float3 {
+    get
+  }
+}
+public protocol CWArObjectRepository {
+  func createArObject(catalogItem: CWSDKData.CWCatalogItemEntity) -> CWSDKRender.CWArObjectEntity
+  func loadModel(from modelUrl: Foundation.URL) -> Combine.AnyPublisher<RealityFoundation.ModelEntity, Swift.Error>
+}
+public class CWArObjectRepositoryMock : CWSDKRender.CWArObjectRepository {
+  public init(downloadingRepository: CWSDKData.CWDownloadingRepository)
+  public func createArObject(catalogItem: CWSDKData.CWCatalogItemEntity) -> CWSDKRender.CWArObjectEntity
+  public func loadModel(from modelUrl: Foundation.URL) -> Combine.AnyPublisher<RealityFoundation.ModelEntity, Swift.Error>
+  @objc deinit
+}
+public protocol CWArObjectSelectionDelegate : AnyObject {
+  func arObjectSelected(_ arObject: CWSDKRender.CWArObjectEntity)
+  func arObjectDeselected(_ arObject: CWSDKRender.CWArObjectEntity)
+}
+public protocol CWArObjectManagementDelegate : AnyObject {
+  func arObjectAdded(_ arObject: CWSDKRender.CWArObjectEntity)
+  func arObjectRemoved(_ arObject: CWSDKRender.CWArObjectEntity)
+}
+public enum CWArObjectSelectionMode {
+  case single
+  case multiple
+  public static func == (a: CWSDKRender.CWArObjectSelectionMode, b: CWSDKRender.CWArObjectSelectionMode) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
+  public var hashValue: Swift.Int {
+    get
+  }
+}
+@objc public class CWArAdapter : ObjectiveC.NSObject, ARKit.ARSessionDelegate, ARKit.ARCoachingOverlayViewDelegate {
+  final public let arView: RealityKit.ARView
+  public var delegateQueue: Dispatch.DispatchQueue? {
+    get
+    set
+  }
+  weak public var arSessionDelegate: ARKit.ARSessionDelegate?
+  weak public var arCoachingOverlayViewDelegate: ARKit.ARCoachingOverlayViewDelegate?
+  weak public var arObjectSelectionDelegate: CWSDKRender.CWArObjectSelectionDelegate?
+  weak public var arObjectManagementDelegate: CWSDKRender.CWArObjectManagementDelegate?
+  public init(frame: CoreGraphics.CGRect)
+  public func runArSession()
+  public func pauseArSession()
+  @objc deinit
+  public var hudEnabled: Swift.Bool {
+    get
+    set
+  }
+  public var hudColor: UIKit.UIColor?
+  public var hudShown: Swift.Bool {
+    get
+    set
+  }
+  public var hudObject: CWSDKRender.CWArObjectEntity? {
+    get
+    set
+  }
+  public var arObjects: [CWSDKRender.CWArObjectEntity] {
+    get
+  }
+  public var selectedArObjects: [CWSDKRender.CWArObjectEntity] {
+    get
+  }
+  public var arObjectSelectionMode: CWSDKRender.CWArObjectSelectionMode
+  public func placeArObjectFromHud() -> CWSDKRender.CWArObjectEntity?
+  public func placeArObject(_ arObject: CWSDKRender.CWArObjectEntity, to world: simd.float4x4)
+  public func removeArObject(_ arObject: CWSDKRender.CWArObjectEntity)
+  public func selectArObject(_ arObject: CWSDKRender.CWArObjectEntity)
+  public func deselectArObject(_ arObject: CWSDKRender.CWArObjectEntity)
+  public func deselectAllArObjects()
+  @objc public func session(_ session: ARKit.ARSession, didUpdate frame: ARKit.ARFrame)
+  @objc public func session(_ session: ARKit.ARSession, didAdd anchors: [ARKit.ARAnchor])
+  @objc public func session(_ session: ARKit.ARSession, didUpdate anchors: [ARKit.ARAnchor])
+  @objc public func session(_ session: ARKit.ARSession, didRemove anchors: [ARKit.ARAnchor])
+  @objc public func session(_ session: ARKit.ARSession, didFailWithError error: Swift.Error)
+  @objc public func session(_ session: ARKit.ARSession, cameraDidChangeTrackingState camera: ARKit.ARCamera)
+  @objc public func sessionWasInterrupted(_ session: ARKit.ARSession)
+  @objc public func sessionInterruptionEnded(_ session: ARKit.ARSession)
+  @objc public func sessionShouldAttemptRelocalization(_ session: ARKit.ARSession) -> Swift.Bool
+  @objc public func session(_ session: ARKit.ARSession, didOutputAudioSampleBuffer audioSampleBuffer: CoreMedia.CMSampleBuffer)
+  @objc public func session(_ session: ARKit.ARSession, didOutputCollaborationData data: ARKit.ARSession.CollaborationData)
+  @objc public func session(_ session: ARKit.ARSession, didChange geoTrackingStatus: ARKit.ARGeoTrackingStatus)
+  public var coachingEnabled: Swift.Bool {
+    get
+    set
+  }
+  @objc public func coachingOverlayViewDidRequestSessionReset(_ coachingOverlayView: ARKit.ARCoachingOverlayView)
+  @objc public func coachingOverlayViewWillActivate(_ coachingOverlayView: ARKit.ARCoachingOverlayView)
+  @objc public func coachingOverlayViewDidDeactivate(_ coachingOverlayView: ARKit.ARCoachingOverlayView)
+}
+extension CWSDKRender.CWArAdapter : CWSDKRender.CWArObjectSelectionDelegate {
+  public func arObjectSelected(_ arObject: CWSDKRender.CWArObjectEntity)
+  public func arObjectDeselected(_ arObject: CWSDKRender.CWArObjectEntity)
+}
+extension CWSDKRender.CWArObjectSelectionMode : Swift.Equatable {}
+extension CWSDKRender.CWArObjectSelectionMode : Swift.Hashable {}

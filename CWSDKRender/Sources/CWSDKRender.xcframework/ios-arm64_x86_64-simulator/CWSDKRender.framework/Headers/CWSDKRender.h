@@ -1,6 +1,5 @@
 //
 //  CWSDKRender.h
-//  CWSDKRender
 //
 //  Created by Sergey Muravev on 21.01.2022.
 //

@@ -1,6 +1,5 @@
 //
 //  CWSDKData.h
-//  CWSDKData
 //
 //  Created by Sergey Muravev on 21.01.2022.
 //

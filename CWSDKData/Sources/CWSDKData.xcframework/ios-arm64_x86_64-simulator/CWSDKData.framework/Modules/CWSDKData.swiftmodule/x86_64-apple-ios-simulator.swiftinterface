@@ -1,10 +1,138 @@
 // swift-interface-format-version: 1.0
 // swift-compiler-version: Apple Swift version 5.5.2 (swiftlang-1300.0.47.5 clang-1300.0.29.30)
-// swift-module-flags: -target x86_64-apple-ios15.2-simulator -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name CWSDKData
+// swift-module-flags: -target x86_64-apple-ios14.5-simulator -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name CWSDKData
 @_exported import CWSDKData
+import Combine
+import CryptoKit
 import Foundation
 import Swift
 import _Concurrency
-public struct ConfigWiseSDK {
-  public init()
+@_hasMissingDesignatedInitializers final public class ConfigWiseSDK {
+  @objc deinit
 }
+extension CWSDKData.ConfigWiseSDK {
+  public enum AuthMode {
+    case b2c
+    case b2b
+    public static func == (a: CWSDKData.ConfigWiseSDK.AuthMode, b: CWSDKData.ConfigWiseSDK.AuthMode) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
+    public var hashValue: Swift.Int {
+      get
+    }
+  }
+  public enum InitializeOption {
+    case channelToken(Swift.String)
+    case authMode(CWSDKData.ConfigWiseSDK.AuthMode)
+    case testMode(Swift.Bool)
+  }
+  public static var authMode: CWSDKData.ConfigWiseSDK.AuthMode {
+    get
+  }
+  public static var isInitialized: Swift.Bool {
+    get
+  }
+  public static func initialize(_ options: [CWSDKData.ConfigWiseSDK.InitializeOption])
+}
+extension CWSDKData.ConfigWiseSDK {
+  public static let unauthorizedNotification: Foundation.NSNotification.Name
+}
+@_inheritsConvenienceInitializers public class CWAuthRepositoryImpl : CWSDKData.CWApiRepository, CWSDKData.CWAuthRepository {
+  public var isAuthorised: Swift.Bool {
+    get
+  }
+  public func login(_ query: CWSDKData.CWLoginQuery) -> Combine.AnyPublisher<CWSDKData.CWLoginEntity, Swift.Error>
+  public func logout() -> Combine.AnyPublisher<Swift.Void, Swift.Error>
+  override public init()
+  @objc deinit
+}
+@_inheritsConvenienceInitializers public class CWCatalogItemRepositoryMock : CWSDKData.CWMockRepository, CWSDKData.CWCatalogItemRepository {
+  public func getCatalogItems(_ query: CWSDKData.CWCatalogItemQuery) -> Combine.AnyPublisher<[CWSDKData.CWCatalogItemEntity], Swift.Error>
+  public func getCatalogItem(_ query: CWSDKData.CWCatalogItemQuery) -> Combine.AnyPublisher<CWSDKData.CWCatalogItemEntity, Swift.Error>
+  override public init()
+  @objc deinit
+}
+public struct CWLoginEntity {
+  public var success: Swift.Bool {
+    get
+  }
+  public var message: Swift.String? {
+    get
+  }
+  public init(success: Swift.Bool, message: Swift.String? = nil)
+}
+@_inheritsConvenienceInitializers public class CWDownloadingRepositoryMock : CWSDKData.CWMockRepository, CWSDKData.CWDownloadingRepository {
+  public func download(_ url: Foundation.URL) -> Combine.AnyPublisher<Foundation.URL, Swift.Error>
+  override public init()
+  @objc deinit
+}
+public protocol CWAuthRepository {
+  var isAuthorised: Swift.Bool { get }
+  func login(_ query: CWSDKData.CWLoginQuery) -> Combine.AnyPublisher<CWSDKData.CWLoginEntity, Swift.Error>
+  func logout() -> Combine.AnyPublisher<Swift.Void, Swift.Error>
+}
+public protocol CWDownloadingRepository {
+  func download(_ url: Foundation.URL) -> Combine.AnyPublisher<Foundation.URL, Swift.Error>
+}
+public struct CWCatalogItemQuery {
+  public var id: Swift.Int?
+  public var max: Swift.Int?
+  public var offset: Swift.Int?
+  public init(id: Swift.Int? = nil, max: Swift.Int? = nil, offset: Swift.Int? = nil)
+}
+public struct CWLoginQuery {
+  public var username: Swift.String
+  public var password: Swift.String
+  public init(username: Swift.String = "", password: Swift.String = "")
+}
+public struct CWCatalogItemEntity : Swift.Identifiable {
+  public var id: Swift.Int
+  public var createdAt: Foundation.Date
+  public var modifiedAt: Foundation.Date
+  public var name: Swift.String
+  public var thumbnailUrl: Foundation.URL?
+  public var ean: Swift.String?
+  public var productId: Swift.Int?
+  public var productUrl: Foundation.URL?
+  public var modelUrl: Foundation.URL?
+  public init(id: Swift.Int, createdAt: Foundation.Date, modifiedAt: Foundation.Date, name: Swift.String = "", thumbnailUrl: Foundation.URL? = nil, ean: Swift.String? = nil, productId: Swift.Int? = nil, productUrl: Foundation.URL? = nil, modelUrl: Foundation.URL? = nil)
+  public typealias ID = Swift.Int
+}
+public class CWDownloadingRepositoryImpl : CWSDKData.CWApiRepository, CWSDKData.CWDownloadingRepository {
+  public init(cacheDir: Foundation.URL? = nil)
+  public func download(_ url: Foundation.URL) -> Combine.AnyPublisher<Foundation.URL, Swift.Error>
+  @objc deinit
+}
+public class CWApiRepository {
+  public init()
+  @objc deinit
+}
+public protocol CWCatalogItemRepository {
+  func getCatalogItems(_ query: CWSDKData.CWCatalogItemQuery) -> Combine.AnyPublisher<[CWSDKData.CWCatalogItemEntity], Swift.Error>
+  func getCatalogItem(_ query: CWSDKData.CWCatalogItemQuery) -> Combine.AnyPublisher<CWSDKData.CWCatalogItemEntity, Swift.Error>
+}
+@_inheritsConvenienceInitializers public class CWCatalogItemRepositoryImpl : CWSDKData.CWApiRepository, CWSDKData.CWCatalogItemRepository {
+  public func getCatalogItems(_ query: CWSDKData.CWCatalogItemQuery) -> Combine.AnyPublisher<[CWSDKData.CWCatalogItemEntity], Swift.Error>
+  public func getCatalogItem(_ query: CWSDKData.CWCatalogItemQuery) -> Combine.AnyPublisher<CWSDKData.CWCatalogItemEntity, Swift.Error>
+  override public init()
+  @objc deinit
+}
+extension Swift.String : Foundation.LocalizedError {
+  public var errorDescription: Swift.String? {
+    get
+  }
+}
+@_inheritsConvenienceInitializers public class CWAuthRepositoryMock : CWSDKData.CWMockRepository, CWSDKData.CWAuthRepository {
+  public var isAuthorised: Swift.Bool {
+    get
+  }
+  public func login(_ query: CWSDKData.CWLoginQuery) -> Combine.AnyPublisher<CWSDKData.CWLoginEntity, Swift.Error>
+  public func logout() -> Combine.AnyPublisher<Swift.Void, Swift.Error>
+  override public init()
+  @objc deinit
+}
+public class CWMockRepository {
+  public init()
+  @objc deinit
+}
+extension CWSDKData.ConfigWiseSDK.AuthMode : Swift.Equatable {}
+extension CWSDKData.ConfigWiseSDK.AuthMode : Swift.Hashable {}

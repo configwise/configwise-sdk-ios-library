@@ -13,12 +13,12 @@ Pod::Spec.new do |s|
     s.ios.deployment_target   = '14.5'
 
     s.subspec 'CWSDKData' do |dsp|
-        dsp.vendored_frameworks = "#{dsp.name}/Sources/#{dsp.name}.xcframework"
+        dsp.vendored_frameworks = "CWSDKData/Sources/CWSDKData.xcframework"
         dsp.frameworks = 'CryptoKit'
     end
 
     s.subspec 'CWSDKRender' do |rsp|
-        rsp.vendored_frameworks = "#{rsp.name}/Sources/#{rsp.name}.xcframework"
+        rsp.vendored_frameworks = "CWSDKRender/Sources/CWSDKRender.xcframework"
         rsp.frameworks = 'ARKit', 'RealityKit'
         rsp.dependency 'ConfigWiseSDK/CWSDKData'
     end

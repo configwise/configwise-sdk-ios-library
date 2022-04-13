@@ -15,5 +15,4 @@ Pod::Spec.new do |s|
     s.ios.deployment_target   = '14.5'
 
     s.frameworks = 'ARKit', 'RealityKit'
-    s.dependency 'CWSDKData', '~> 2.0.0', :git => 'https://github.com/configwise/configwise-sdk-ios-library.git'
 end

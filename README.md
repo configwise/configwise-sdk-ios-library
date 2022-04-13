@@ -13,9 +13,19 @@ Use the following repo URL to install `CWSDKData`, `CWSDKRender` libs: https://g
 
 **CocoaPods**
 
+To add both `ConfigWiseSDK/CWSDKData` and `ConfigWiseSDK/CWSDKRender` libs, you can use:
 ```
-pod 'CWSDKData', :git => 'https://github.com/configwise/configwise-sdk-ios-library.git'
-pod 'CWSDKRender', :git => 'https://github.com/configwise/configwise-sdk-ios-library.git'
+pod 'ConfigWiseSDK', :git => 'https://github.com/configwise/configwise-sdk-ios-library.git'
+```
+
+If you only need `CWSDKData` lib, then:
+```
+pod 'ConfigWiseSDK/CWSDKData', :git => 'https://github.com/configwise/configwise-sdk-ios-library.git'
+```
+
+If `CWSDKRender` only, then:
+```
+pod 'ConfigWiseSDK/CWSDKRender', :git => 'https://github.com/configwise/configwise-sdk-ios-library.git'
 ```
 
 ## Initialization

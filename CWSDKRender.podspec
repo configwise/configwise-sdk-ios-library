@@ -14,5 +14,5 @@ Pod::Spec.new do |s|
     s.frameworks = 'ARKit', 'RealityKit'
     s.dependency 'CWSDKData', '~> 2.0.0', :git => 'https://github.com/configwise/configwise-sdk-ios-library.git'
 
-    s.ios.vendored_frameworks = 'CWSDKRender/Sources/CWSDKRender.xcframework'
+    s.ios.vendored_frameworks = "#{s.name}/Sources/#{s.name}.xcframework"
 end

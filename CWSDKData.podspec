@@ -13,5 +13,5 @@ Pod::Spec.new do |s|
 
     s.frameworks = 'CryptoKit'
 
-    s.ios.vendored_frameworks = 'CWSDKData/Sources/CWSDKData.xcframework'
+    s.ios.vendored_frameworks = "#{s.name}/Sources/#{s.name}.xcframework"
 end

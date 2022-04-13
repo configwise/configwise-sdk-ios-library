@@ -7,6 +7,7 @@ Pod::Spec.new do |s|
     s.author                  = { "VipaHelda BV" => "sdk@configwise.io" }
     s.license                 = { :type => 'Apache-2.0', :file => 'LICENSE' }
 
+    s.swift_versions          = ['5.0']
     s.platform                = :ios
     s.ios.deployment_target   = '14.5'
     s.source                  = { :git => "https://github.com/configwise/configwise-sdk-ios-library.git", :tag => "#{s.version}" }

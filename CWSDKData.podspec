@@ -11,7 +11,6 @@ Pod::Spec.new do |s|
     s.vendored_frameworks     = "#{s.name}/Sources/#{s.name}.xcframework"
 
     s.platform                = :ios
-    s.swift_version           = '5.0'
     s.ios.deployment_target   = '14.5'
 
     s.frameworks = 'CryptoKit'

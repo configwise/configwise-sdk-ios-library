@@ -4,9 +4,6 @@
 import PackageDescription
 
 
-// TODO [smuravev] See an example of SPM Package.swift, here: https://github.com/firebase/firebase-ios-sdk/blob/master/Package.swift
-//                 Remove this comment, after we finally configure SPM based distribution.
-
 let package = Package(
     name: "ConfigWiseSDK",
     platforms: [.iOS("14.5")],

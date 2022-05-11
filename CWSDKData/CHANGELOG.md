@@ -9,6 +9,6 @@
 
 #  CWSDKData v2.1.0
 
-+ Downloading API has been extended (both functions supported now: callback based and Combine publisher based).
++ ConfigWise API has been extended (both functions supported now: callback based and Combine publisher based).
 + Bug fixes in downloading API.
 + Mock services have been removed.

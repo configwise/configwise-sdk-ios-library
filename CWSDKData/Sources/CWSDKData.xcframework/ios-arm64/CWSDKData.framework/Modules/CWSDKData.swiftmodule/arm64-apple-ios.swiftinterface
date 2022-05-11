@@ -25,6 +25,9 @@ extension CWSDKData.ConfigWiseSDK {
     case authMode(CWSDKData.ConfigWiseSDK.AuthMode)
     case testMode(Swift.Bool)
   }
+  public static var testMode: Swift.Bool {
+    get
+  }
   public static var authMode: CWSDKData.ConfigWiseSDK.AuthMode {
     get
   }
@@ -40,16 +43,21 @@ extension CWSDKData.ConfigWiseSDK {
   public var isAuthorised: Swift.Bool {
     get
   }
-  public func login(_ query: CWSDKData.CWLoginQuery) -> Combine.AnyPublisher<CWSDKData.CWLoginEntity, Swift.Error>
-  public func logout() -> Combine.AnyPublisher<Swift.Void, Swift.Error>
+  public func login(_ query: CWSDKData.CWLoginQuery, block: @escaping (CWSDKData.CWLoginEntity?, Swift.Error?) -> Swift.Void)
+  public func loginAsync(_ query: CWSDKData.CWLoginQuery) -> Combine.AnyPublisher<CWSDKData.CWLoginEntity, Swift.Error>
+  public func logout(block: @escaping (Swift.Error?) -> Swift.Void)
+  public func logoutAsync() -> Combine.AnyPublisher<Swift.Void, Swift.Error>
   override public init()
   @objc deinit
 }
-@_inheritsConvenienceInitializers public class CWCatalogItemRepositoryMock : CWSDKData.CWMockRepository, CWSDKData.CWCatalogItemRepository {
-  public func getCatalogItems(_ query: CWSDKData.CWCatalogItemQuery) -> Combine.AnyPublisher<[CWSDKData.CWCatalogItemEntity], Swift.Error>
-  public func getCatalogItem(_ query: CWSDKData.CWCatalogItemQuery) -> Combine.AnyPublisher<CWSDKData.CWCatalogItemEntity, Swift.Error>
-  override public init()
-  @objc deinit
+public enum CWError : Swift.Error, Swift.CustomStringConvertible, Foundation.LocalizedError {
+  case invocationFailed(reason: (message: Swift.String?, code: Swift.Int, statusCode: Swift.Int))
+  public var description: Swift.String {
+    get
+  }
+  public var errorDescription: Swift.String? {
+    get
+  }
 }
 public struct CWLoginEntity {
   public var success: Swift.Bool {
@@ -60,18 +68,20 @@ public struct CWLoginEntity {
   }
   public init(success: Swift.Bool, message: Swift.String? = nil)
 }
-@_inheritsConvenienceInitializers public class CWDownloadingRepositoryMock : CWSDKData.CWMockRepository, CWSDKData.CWDownloadingRepository {
-  public func download(_ url: Foundation.URL) -> Combine.AnyPublisher<Foundation.URL, Swift.Error>
-  override public init()
-  @objc deinit
-}
 public protocol CWAuthRepository {
   var isAuthorised: Swift.Bool { get }
-  func login(_ query: CWSDKData.CWLoginQuery) -> Combine.AnyPublisher<CWSDKData.CWLoginEntity, Swift.Error>
-  func logout() -> Combine.AnyPublisher<Swift.Void, Swift.Error>
+  func login(_ query: CWSDKData.CWLoginQuery, block: @escaping (CWSDKData.CWLoginEntity?, Swift.Error?) -> Swift.Void)
+  func loginAsync(_ query: CWSDKData.CWLoginQuery) -> Combine.AnyPublisher<CWSDKData.CWLoginEntity, Swift.Error>
+  func logout(block: @escaping (Swift.Error?) -> Swift.Void)
+  func logoutAsync() -> Combine.AnyPublisher<Swift.Void, Swift.Error>
 }
 public protocol CWDownloadingRepository {
-  func download(_ url: Foundation.URL) -> Combine.AnyPublisher<Foundation.URL, Swift.Error>
+  func downloadModel(_ url: Foundation.URL, block: @escaping (Foundation.URL?, Swift.Error?) -> Swift.Void)
+  func downloadModelAsync(_ url: Foundation.URL) -> Combine.AnyPublisher<Foundation.URL?, Swift.Error>
+  func download(_ url: Foundation.URL, block: @escaping (Foundation.URL?, Swift.Error?) -> Swift.Void)
+  func downloadAsync(_ url: Foundation.URL) -> Combine.AnyPublisher<Foundation.URL?, Swift.Error>
+  func externalDownload(_ url: Foundation.URL, block: @escaping (Foundation.URL?, Swift.Error?) -> Swift.Void)
+  func externalDownloadAsync(_ url: Foundation.URL) -> Combine.AnyPublisher<Foundation.URL?, Swift.Error>
 }
 public struct CWCatalogItemQuery {
   public var id: Swift.Int?
@@ -99,7 +109,12 @@ public struct CWCatalogItemEntity : Swift.Identifiable {
 }
 public class CWDownloadingRepositoryImpl : CWSDKData.CWApiRepository, CWSDKData.CWDownloadingRepository {
   public init(cacheDir: Foundation.URL? = nil)
-  public func download(_ url: Foundation.URL) -> Combine.AnyPublisher<Foundation.URL, Swift.Error>
+  public func downloadModel(_ url: Foundation.URL, block: @escaping (Foundation.URL?, Swift.Error?) -> Swift.Void)
+  public func downloadModelAsync(_ url: Foundation.URL) -> Combine.AnyPublisher<Foundation.URL?, Swift.Error>
+  public func download(_ url: Foundation.URL, block: @escaping (Foundation.URL?, Swift.Error?) -> Swift.Void)
+  public func downloadAsync(_ url: Foundation.URL) -> Combine.AnyPublisher<Foundation.URL?, Swift.Error>
+  public func externalDownload(_ url: Foundation.URL, block: @escaping (Foundation.URL?, Swift.Error?) -> Swift.Void)
+  public func externalDownloadAsync(_ url: Foundation.URL) -> Combine.AnyPublisher<Foundation.URL?, Swift.Error>
   @objc deinit
 }
 public class CWApiRepository {
@@ -107,12 +122,16 @@ public class CWApiRepository {
   @objc deinit
 }
 public protocol CWCatalogItemRepository {
-  func getCatalogItems(_ query: CWSDKData.CWCatalogItemQuery) -> Combine.AnyPublisher<[CWSDKData.CWCatalogItemEntity], Swift.Error>
-  func getCatalogItem(_ query: CWSDKData.CWCatalogItemQuery) -> Combine.AnyPublisher<CWSDKData.CWCatalogItemEntity, Swift.Error>
+  func getCatalogItems(_ query: CWSDKData.CWCatalogItemQuery, block: @escaping ([CWSDKData.CWCatalogItemEntity], Swift.Error?) -> Swift.Void)
+  func getCatalogItemsAsync(_ query: CWSDKData.CWCatalogItemQuery) -> Combine.AnyPublisher<[CWSDKData.CWCatalogItemEntity], Swift.Error>
+  func getCatalogItem(_ query: CWSDKData.CWCatalogItemQuery, block: @escaping (CWSDKData.CWCatalogItemEntity?, Swift.Error?) -> Swift.Void)
+  func getCatalogItemAsync(_ query: CWSDKData.CWCatalogItemQuery) -> Combine.AnyPublisher<CWSDKData.CWCatalogItemEntity?, Swift.Error>
 }
 @_inheritsConvenienceInitializers public class CWCatalogItemRepositoryImpl : CWSDKData.CWApiRepository, CWSDKData.CWCatalogItemRepository {
-  public func getCatalogItems(_ query: CWSDKData.CWCatalogItemQuery) -> Combine.AnyPublisher<[CWSDKData.CWCatalogItemEntity], Swift.Error>
-  public func getCatalogItem(_ query: CWSDKData.CWCatalogItemQuery) -> Combine.AnyPublisher<CWSDKData.CWCatalogItemEntity, Swift.Error>
+  public func getCatalogItems(_ query: CWSDKData.CWCatalogItemQuery, block: @escaping ([CWSDKData.CWCatalogItemEntity], Swift.Error?) -> Swift.Void)
+  public func getCatalogItemsAsync(_ query: CWSDKData.CWCatalogItemQuery) -> Combine.AnyPublisher<[CWSDKData.CWCatalogItemEntity], Swift.Error>
+  public func getCatalogItem(_ query: CWSDKData.CWCatalogItemQuery, block: @escaping (CWSDKData.CWCatalogItemEntity?, Swift.Error?) -> Swift.Void)
+  public func getCatalogItemAsync(_ query: CWSDKData.CWCatalogItemQuery) -> Combine.AnyPublisher<CWSDKData.CWCatalogItemEntity?, Swift.Error>
   override public init()
   @objc deinit
 }
@@ -120,19 +139,6 @@ extension Swift.String : Foundation.LocalizedError {
   public var errorDescription: Swift.String? {
     get
   }
-}
-@_inheritsConvenienceInitializers public class CWAuthRepositoryMock : CWSDKData.CWMockRepository, CWSDKData.CWAuthRepository {
-  public var isAuthorised: Swift.Bool {
-    get
-  }
-  public func login(_ query: CWSDKData.CWLoginQuery) -> Combine.AnyPublisher<CWSDKData.CWLoginEntity, Swift.Error>
-  public func logout() -> Combine.AnyPublisher<Swift.Void, Swift.Error>
-  override public init()
-  @objc deinit
-}
-public class CWMockRepository {
-  public init()
-  @objc deinit
 }
 extension CWSDKData.ConfigWiseSDK.AuthMode : Swift.Equatable {}
 extension CWSDKData.ConfigWiseSDK.AuthMode : Swift.Hashable {}

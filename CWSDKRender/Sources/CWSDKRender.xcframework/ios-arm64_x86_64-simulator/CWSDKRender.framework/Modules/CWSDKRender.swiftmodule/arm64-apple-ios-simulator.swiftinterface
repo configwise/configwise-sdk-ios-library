@@ -13,7 +13,8 @@ import simd
 public class CWArObjectRepositoryImpl : CWSDKRender.CWArObjectRepository {
   public init(downloadingRepository: CWSDKData.CWDownloadingRepository)
   public func createArObject(catalogItem: CWSDKData.CWCatalogItemEntity) -> CWSDKRender.CWArObjectEntity
-  public func loadModel(from modelUrl: Foundation.URL) -> Combine.AnyPublisher<RealityFoundation.ModelEntity, Swift.Error>
+  public func loadModel(_ modelUrl: Foundation.URL, block: @escaping (RealityFoundation.ModelEntity?, Swift.Error?) -> Swift.Void)
+  public func loadModelAsync(_ modelUrl: Foundation.URL) -> Combine.AnyPublisher<RealityFoundation.ModelEntity?, Swift.Error>
   @objc deinit
 }
 public enum CWLoadable<T> {
@@ -88,13 +89,8 @@ extension simd.simd_float4x4 {
 }
 public protocol CWArObjectRepository {
   func createArObject(catalogItem: CWSDKData.CWCatalogItemEntity) -> CWSDKRender.CWArObjectEntity
-  func loadModel(from modelUrl: Foundation.URL) -> Combine.AnyPublisher<RealityFoundation.ModelEntity, Swift.Error>
-}
-public class CWArObjectRepositoryMock : CWSDKRender.CWArObjectRepository {
-  public init(downloadingRepository: CWSDKData.CWDownloadingRepository)
-  public func createArObject(catalogItem: CWSDKData.CWCatalogItemEntity) -> CWSDKRender.CWArObjectEntity
-  public func loadModel(from modelUrl: Foundation.URL) -> Combine.AnyPublisher<RealityFoundation.ModelEntity, Swift.Error>
-  @objc deinit
+  func loadModel(_ modelUrl: Foundation.URL, block: @escaping (RealityFoundation.ModelEntity?, Swift.Error?) -> Swift.Void)
+  func loadModelAsync(_ modelUrl: Foundation.URL) -> Combine.AnyPublisher<RealityFoundation.ModelEntity?, Swift.Error>
 }
 public protocol CWArObjectSelectionDelegate : AnyObject {
   func arObjectSelected(_ arObject: CWSDKRender.CWArObjectEntity)

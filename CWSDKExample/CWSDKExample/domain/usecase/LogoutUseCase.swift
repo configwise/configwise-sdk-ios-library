@@ -18,7 +18,7 @@ public class LogoutUseCase {
     }
 
     public func execute() -> AnyPublisher<Void, Never> {
-        return authRepository.logout()
+        return authRepository.logoutAsync()
             .catch { error -> Just<Void> in
                 print("ERROR [LogoutUseCase.execute]", error)
                 return Just(())

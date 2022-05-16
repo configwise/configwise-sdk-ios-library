@@ -18,6 +18,6 @@ public class GetCatalogItemsUseCase {
     }
 
     public func execute(_ query: CWCatalogItemQuery) -> AnyPublisher<[CWCatalogItemEntity], Error> {
-        return catalogItemRepository.getCatalogItems(query)
+        return catalogItemRepository.getCatalogItemsAsync(query)
     }
 }

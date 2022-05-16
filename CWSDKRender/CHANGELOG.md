@@ -11,3 +11,7 @@
 
 + Bug fixes in loading mechanism (of 3D models).
 + Mock services have been removed.
+
+#  CWSDKRender v2.1.1
+
++ Bug fixing (runtime crashes).

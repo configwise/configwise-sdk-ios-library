@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name                    = "ConfigWiseSDK"
-    s.version                 = "2.1.0"
+    s.version                 = "2.1.1"
     s.summary                 = "#{s.name} (iOS) #{s.version}"
     s.homepage                = "https://github.com/configwise/configwise-sdk-ios-library"
 

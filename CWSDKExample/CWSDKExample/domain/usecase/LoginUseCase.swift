@@ -18,7 +18,7 @@ public class LoginUseCase {
     }
 
     public func execute(_ query: CWLoginQuery) -> AnyPublisher<CWLoginEntity, Never> {
-        return authRepository.login(query)
+        return authRepository.loginAsync(query)
             .catch { error -> Just<CWLoginEntity> in
                 return Just(CWLoginEntity(success: false, message: error.localizedDescription))
             }

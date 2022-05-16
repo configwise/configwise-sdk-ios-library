@@ -128,8 +128,8 @@ extension ARSceneViewModel {
                     self.isLoading = false
                 },
                 receiveValue: { [weak self] in
-                    guard let self = self else { return }
-                    self.startPlacement(catalogItem: $0)
+                    guard let catalogItem = $0 else { return }
+                    self?.startPlacement(catalogItem: catalogItem)
                 }
             )
             .store(in: &self.subscriptions)
@@ -145,9 +145,7 @@ extension ARSceneViewModel {
     }
 
     func startPlacement(arObject: CWArObjectEntity) {
-        DispatchQueue.main.async { [weak self] in
-            self?.flowState = .placement(arObject)
-        }
+        self.flowState = .placement(arObject)
 
         if let arAdapter = self.arAdapter {
             arAdapter.hudShown = true
@@ -166,9 +164,7 @@ extension ARSceneViewModel {
             arAdapter.hudShown = false
         }
 
-        DispatchQueue.main.async { [weak self] in
-            self?.flowState = .initialized
-        }
+        self.flowState = .initialized
     }
 
     func removeSelectedObject() {

@@ -17,7 +17,7 @@ public class GetCatalogItemUseCase {
         self.catalogItemRepository = catalogItemRepository
     }
 
-    public func execute(_ query: CWCatalogItemQuery) -> AnyPublisher<CWCatalogItemEntity, Error> {
-        return catalogItemRepository.getCatalogItem(query)
+    public func execute(_ query: CWCatalogItemQuery) -> AnyPublisher<CWCatalogItemEntity?, Error> {
+        return catalogItemRepository.getCatalogItemAsync(query)
     }
 }
